@@ -1,0 +1,53 @@
+{{#extends 'base'}}
+
+{{#block 'content'}}
+    <!-- FORM METHOD MUST BE DECLARED -->
+    <!-- POST => DECLARATION OF INTENTION TO SEND INFO TO SERVER -->
+    <!-- GET => DECLARATION OF INTENTION TO GET INFO FROM SERVER -->
+    <form action="" method="POST">
+        <div>
+            <label>Enter the food name:</label>
+            <!-- EVERY FORM ELEMENT MUST HAVE A NAME ATTRIBUTE FOR FORMS TO WORK -->
+            <input type="text" name="foodName" class="form-control">
+            <label>Enter the calories:</label>
+            <!-- IF MULTIPLE INPUTS WITH SAME NAME ATTRIBUTE -> THE VALUE WILL BE STORED IN ARRAY -->
+            <input type="text" name="calories" class="form-control">
+
+            <!-- RADIO BUTTONS -> MUST ALL HAVE THE SAME NAME ATTRIBUTE (IF SAME CATEGORY) -->
+            <div>
+                <label>Select meal:</label>
+                <input type="radio" name="meal" class="form-check-input" value="breakfast">
+                <label class="form-check-label">Breakfast</label>
+
+                <input type="radio" name="meal" class="form-check-input" value="lunch">
+                <label class="form-check-label">Lunch</label>
+
+                <input type="radio" name="meal" class="form-check-input" value="dinner">
+                <label class="form-check-label">Dinner</label>
+            </div>
+
+            <!-- CHECKBOXES -> MUST ALL HAVE SAME NAME ATTRIBUTE -->
+            <div>
+                <label>Select tags</label>
+                <input type="checkbox" name="tag" class="form-check-input" value="homecooked">
+                <label class="form-check-label">Home-cooked</label>
+
+                <input type="checkbox" name="tag" class="form-check-input" value="oily">
+                <label class="form-check-label">Oily</label>
+
+                <input type="checkbox" name="tag" class="form-check-input" value="vegan">
+                <label class="form-check-label">Vegan</label>
+
+                <input type="checkbox" name="tag" class="form-check-input" value="healthy">
+                <label class="form-check-label">Healthy</label>
+            </div>
+
+        </div>
+        <!-- SUBMIT BUTTON MUST BE IN THE FORM -->
+        <input type="submit" class="btn btn-primary mt-3" value="Submit">
+    </form>
+
+
+{{/block}}
+
+{{/extends}}
