@@ -42,6 +42,24 @@ app.post('/calculate-bmi', function(req, res) {
     });
 })
 
+app.get('/fruits', function(req, res) {
+    res.render('fruits.hbs')
+})
+
+app.post('/fruits', function(req, res){
+    let priceList = {
+        'durian': 15,
+        'apple': 3,
+        'orange': 6,
+        'banana': 4
+    };
+
+
+    res.render('fruits.hbs', {
+        totalCost: totalCost
+    })
+})
+
 // START SERVER
 app.listen(3000, function() {
     console.log('Server started.');
