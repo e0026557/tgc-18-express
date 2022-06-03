@@ -1,0 +1,39 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+<form method="POST">
+    <h1>BMI Calculator</h1>
+
+    <div class="mt-5">
+        <label>Select units:</label>
+
+        <input type="radio" name="units" class="form-check-input" value="metric" checked>
+        <label class="form-check-label">Metric</label>
+
+        <input type="radio" name="units" class="form-check-input" value="imperial">
+        <label class="form-check-label">Imperial</label>
+
+    </div>
+
+    <div class="mt-3">
+        <label>Enter your weight</label>
+        <input type="number" step="0.01" name="weight" class="form-control" />
+    </div>
+
+    <div class="mt-3">
+        <label>Enter your height</label>
+        <input type="number" step="0.01" name="height" class="form-control">
+    </div>
+
+
+    <input type="submit" class="btn btn-primary mt-3" value="Calculate BMI">
+</form>
+
+{{#if bmi}}
+<div class="container mt-3">
+    <h3>Your BMI is {{bmi}}</h3>
+</div>
+{{/if}}
+
+{{/block}}
+{{/extends}}

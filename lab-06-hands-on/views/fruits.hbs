@@ -1,0 +1,30 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+<!-- NOTE: The default method is GET -->
+<!-- NOTE: The 'action' attribute will specify the route to send the POST request to -->
+<form method="POST">
+    <h1>Calculate Total Cost</h1>
+
+    <div class="mt-5">
+        <label>Select fruits</label>
+
+        <input type="checkbox" name="items" class="form-check-input" value="durian">
+        <label class="form-check-label">Durian</label>
+
+        <input type="checkbox" name="items" class="form-check-input" value="apple">
+        <label class="form-check-label">Apple</label>
+        
+        <input type="checkbox" name="items" class="form-check-input" value="banana">
+        <label class="form-check-label">Banana</label>
+
+        <input type="checkbox" name="items" class="form-check-input" value="orange">
+        <label class="form-check-label">Orange</label>
+
+    </div>
+
+    <input class="mt-3" type="submit" value="Submit">
+</form>
+
+{{/block}}
+{{/extends}}

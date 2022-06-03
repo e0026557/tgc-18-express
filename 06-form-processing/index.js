@@ -14,7 +14,7 @@ wax.setLayoutPath('views/layouts');
 
 // Set up express to process forms
 app.use(express.urlencoded({
-    'extended': false // use extended : true if you are processing 
+    'extended': false // use extended : true if you are processing complex forms
 }))
 
 // 2. ROUTES
