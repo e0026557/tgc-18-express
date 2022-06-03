@@ -1,0 +1,36 @@
+{{#extends 'base'}}
+
+    {{#block 'main'}}
+        <!-- Iterate list -->
+        <ul>
+            {{#each list}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+
+        <!-- Iterate objects -->
+        <ul>
+            {{#each object}}
+                <li>
+                    <h2>{{this.key1}}</h2>
+                    <p>{{this.key2}}</p>
+                </li>
+            {{/each}}
+        </ul>
+
+        <!-- If <variable> -->
+        {{#if favoriteDrink}}
+            <h1>Favorite drink: {{favoriteDrink}}</h1>
+        {{/if}}
+
+
+        <!-- Custom ifEquals helper -->
+        {{#ifEquals favoriteDrink "milo peng"}}
+            <h1>Favorite drink: {{favoriteDrink}}</h1>
+        {{else}}
+            <h1>Your favorite drink is not milo peng <h1>
+        {{/ifEquals}}
+        
+    {{/block}}
+
+{{/extends}}
