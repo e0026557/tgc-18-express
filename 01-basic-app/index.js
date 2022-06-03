@@ -2,7 +2,7 @@
 // 1. Create a working directory for the app
 // 2. Cd to working directory
 // 3. Type 'npm init' in terminal
-//    'yarn add express'
+//    'yarn add express' -> to install express 
 // 4. Create index.js file
 // const express = require('express')
 // 5. Install node monitor
@@ -14,6 +14,7 @@
 // We need to use Express for this, so we need to include in Node.js
 // NodeJS will look for 'express' in the node_modules folder and locate the index.js there
 // -> the index.js will return an object and will be stored into the const variable called 'express'
+// const variables cannot be reassigned to another value
 const express = require('express');
 
 const hbs = require('hbs');
@@ -22,6 +23,7 @@ const hbs = require('hbs');
 let app = express();
 
 // Tell express that we are using hbs as the template engine
+// By default, hbs files must be stored in the 'views' folder
 app.set('view engine', 'hbs');
 
 // Tell express where to find static files
@@ -62,7 +64,7 @@ app.get('/greet/:firstname/:lastname', function(req, res) {
 
     // No need to put 'hello.hbs' because express knows that we are using hbs as the template engine
     // The second arg -> allows use to pass variables to the hbs file
-    // -> the key is the variable in the hbs file
+    // -> the key is the variable name in the hbs file
     // -> the value is the value for the variable in the hbs file
     res.render('hello', {
         'firstname': firstname,
