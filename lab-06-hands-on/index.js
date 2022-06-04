@@ -71,6 +71,16 @@ app.post('/fruits', function(req, res){
     })
 })
 
+
+app.get('/lost-and-found', (req, res) => {
+    res.render('lost-and-found.hbs');
+})
+
+app.post('/lost-and-found', (req, res) => {
+    res.render('lost=and-found.hbs');
+})
+
+
 // START SERVER
 app.listen(3000, function() {
     console.log('Server started.');
