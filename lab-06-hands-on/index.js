@@ -54,6 +54,17 @@ app.post('/fruits', function(req, res){
         'banana': 4
     };
 
+    // Note that checkboxes may return undefined, a single value, or an array depending on the number of checkboxes checked by user
+    let items = req.body.items || []; // set default value to [] if no checkboxes is checked by user
+    // Put single value into array if only ONE checkbox is checked
+    if (!Array.isArray(items)) {
+        items = [items];
+    }
+
+    let totalCost = 0;
+    for (let item of items) {
+        totalCost += priceList[item];
+    }
 
     res.render('fruits.hbs', {
         totalCost: totalCost
