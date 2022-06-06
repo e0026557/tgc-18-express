@@ -1,12 +1,18 @@
 {{#extends 'base'}}
 {{#block 'content'}}
 
+    <h1>Food Sightings</h1>
+
+    <a href="/food_sightings/create" class="btn btn-primary">Create food sightings</a>
+
     <table class="table">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Descriptions</th>
                 <th>Food</th>
                 <th>Data</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -14,9 +20,13 @@
             {{#each foodSightings}}
                 <tr>
                     <!-- 'this' refers to each item in foodSightings array -->
+                    <td>{{this._id}}</td>
                     <td>{{this.description}}</td>
                     <td>{{this.food}}</td>
                     <td>{{this.datetime}}</td>
+                    <td>
+                        <a href="/food_sighting/edit/{{this._id}}" class="btn btn-primary">Edit</a>
+                    </td>
                 </tr>
             {{/each}}
         </tbody>

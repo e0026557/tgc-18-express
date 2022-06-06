@@ -61,6 +61,44 @@ app.post('/food_sightings/create', async function(req, res) {
     res.redirect('/'); // telling the browser to go to '/' route 
 })
 
+app.get('/food_sighting/edit/:food_sighting_id', async function(req, res) {
+    // 1. We need to know which piece of data to edit
+    // -> need a unique identifier
+    let foodSightingId = req.params.food_sighting_id;
+
+    // 2. Extract out the current values of each fields so that we can populate the form
+    let response = await axios.get(BASE_API_URL + '/sighting/' + foodSightingId);
+    let foodSighting = response.data;
+    console.log(foodSighting.datetime); // -> note that there is a 'Z' at the back
+
+    res.render('edit_food_form.hbs', {
+        description: foodSighting.description,
+        food: foodSighting.food,
+        datetime: foodSighting.datetime.slice(0, -1) // remove the last 'Z'
+    });
+})
+
+app.post('/food_sighting/edit/:food_sighting_id', async function(req, res) {
+    let description = req.body.description;
+    let food = req.body.food.split(','); // to get array
+    let datetime = req.body.datetime;
+
+    let sightingId = req.params.food_sighting_id;
+
+    // 3. Create the payload
+    let payload = {
+        description: description,
+        food: food,
+        datetime: datetime
+    }
+
+    // 4. Send the request
+    await axios.put(BASE_API_URL + '/sighting/' + sightingId, payload);
+
+    res.redirect('/');
+})
+
+
 
 // START SERVER
 app.listen(3000, function() {

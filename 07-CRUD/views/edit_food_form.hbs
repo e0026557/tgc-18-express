@@ -1,0 +1,23 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+<!-- Note: We populate the fields of the form using the 'value' attribute -->
+<form method="POST">
+    <div>
+        <label>Description</label>
+        <input type="text" name="description"class="form-control" value="{{description}}">
+    </div>
+    <div>
+        <label>Food</label>
+        <input type="text" name="food"class="form-control" value="{{food}}">
+    </div>
+    <div>
+        <label>Date</label>
+        <input type="datetime-local" name="datetime"class="form-control" value="{{datetime}}">
+    </div>
+
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+{{/block}}
+{{/extends}}
