@@ -1,0 +1,26 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Descriptions</th>
+                <th>Food</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each foodSightings}}
+                <tr>
+                    <!-- 'this' refers to each item in foodSightings array -->
+                    <td>{{this.description}}</td>
+                    <td>{{this.food}}</td>
+                    <td>{{this.datetime}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+{{/block}}
+{{/extends}}

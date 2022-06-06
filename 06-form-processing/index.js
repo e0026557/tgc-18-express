@@ -10,7 +10,7 @@ app.use(express.static('public')); // tell express to look for the static files 
 
 // Set up wax-on
 wax.on(hbs.handlebars);
-wax.setLayoutPath('views/layouts');
+wax.setLayoutPath('./views/layouts');
 
 // Set up express to process forms
 app.use(express.urlencoded({
