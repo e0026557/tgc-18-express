@@ -51,33 +51,56 @@ app.post('/calculate-bmi', function (req, res) {
     });
 })
 
+// Switch statements -> similar to if statements
+// for (let eachfruit of fruits) {
+//     switch(eachfruit) {
+//         case 'apple':
+//             total += 3;
+//             break; // to prevent fall through
+//         case 'durian':
+//             total += 15;
+//             break;
+//     }
+// }
+
 // Hands on B
+// NOTE: res.send() cannot send as integer because express will intepret as HTTP status code
+// -> send as string instead
+
+// Any sensitive content should be done in the backend (security reasons)
+// Look-up table
+const priceList = {
+    'durian': 15,
+    'apple': 3,
+    'orange': 6,
+    'banana': 4
+};
+
 app.get('/fruits', function (req, res) {
     res.render('fruits.hbs');
 })
 
 app.post('/fruits', function (req, res) {
-    // Any sensitive content should be done in the backend (security reasons)
-    let priceList = {
-        'durian': 15,
-        'apple': 3,
-        'orange': 6,
-        'banana': 4
-    };
+    // For checking
+    // res.send(req.body); // -> undefined if POST unsuccessfully
 
-    // Note that checkboxes may return undefined, a single value, or an array depending on the number of checkboxes checked by user
-    let items = req.body.items || []; // set default value to [] if no checkboxes is checked by user
+
+    // State variables - represents the answer to a problem
+    // Note that checkboxes may return undefined, a single value, or an array depending on the number of checkboxes checked by user -> Need to standardise the input
+    let items = req.body.items || []; // set default value to [] if no checkboxes is checked by user -> 'undefined' (or falsy value)
     // Put single value into array if only ONE checkbox is checked
     if (!Array.isArray(items)) {
         items = [items];
     }
 
     let totalCost = 0;
+    // Note: we can use for-loop with ease because we had standardised the input to be in array
     for (let item of items) {
         totalCost += priceList[item];
     }
 
     res.render('fruits.hbs', {
+        // variable in hbs : variable in index.js
         totalCost: totalCost
     })
 })
