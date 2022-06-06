@@ -4,23 +4,31 @@ const hbs = require('hbs');
 const wax = require('wax-on');
 
 // Set up express
-const app = express();
-app.set('view engine', 'hbs');
+const app = express(); // create express application
+app.set('view engine', 'hbs'); // inform express that we are using hbs as the view engine
 app.use(express.static('public'));
 
 // Set up wax-on
-wax.on(hbs.handlebars);
-wax.setLayoutPath('./views/layouts');
+wax.on(hbs.handlebars); // enable wax-on for handlebars (for template inheritance)
+wax.setLayoutPath('./views/layouts'); // inform wax-on where to find the layouts
 
 // Set up expresss to handle form processing
+// (related to query string's structure)
 app.use(express.urlencoded({
-    extended: false
+    extended: false // for processing HTML forms because they are usually simple structure
 }));
 
 
 // ROUTES
 app.get('/', function (req, res) {
-    res.send('hello there');
+    // req is request from the client. All the data from the client are inside req
+    // res is for us to send back to the client
+    res.send('hello there'); // must ensure that the function will eventually at least one res.send
+                            // only ONE res.send can be executed
+                            // the following functions are considered to be variants of res.send:
+                            // res.render(), res.json(), res.status(), and res.send()
+                            // all of them send back response, but only one of them can be executed per function
+                            // NOTE: they are not a return statement (ie. does not end the function)
 })
 
 // Hands on A
@@ -45,10 +53,11 @@ app.post('/calculate-bmi', function (req, res) {
 
 // Hands on B
 app.get('/fruits', function (req, res) {
-    res.render('fruits.hbs')
+    res.render('fruits.hbs');
 })
 
 app.post('/fruits', function (req, res) {
+    // Any sensitive content should be done in the backend (security reasons)
     let priceList = {
         'durian': 15,
         'apple': 3,

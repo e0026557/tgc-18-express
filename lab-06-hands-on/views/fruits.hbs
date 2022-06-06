@@ -1,4 +1,7 @@
 {{#extends 'base'}}
+
+{{#block 'title'}}Fruits title{{/block}}
+
 {{#block 'content'}}
 
 <!-- NOTE: The default method is GET -->
@@ -9,21 +12,21 @@
     <div class="mt-5">
         <label>Select fruits: </label>
 
-        <input type="checkbox" name="items" class="form-check-input" value="durian">
-        <label class="form-check-label">Durian</label>
+        <input type="checkbox" name="items" class="form-check-input" value="durian" />
+        <label class="form-check-label">Durian ($15.00)</label>
 
-        <input type="checkbox" name="items" class="form-check-input" value="apple">
-        <label class="form-check-label">Apple</label>
+        <input type="checkbox" name="items" class="form-check-input" value="apple" />
+        <label class="form-check-label">Apple ($3.00)</label>
 
-        <input type="checkbox" name="items" class="form-check-input" value="banana">
-        <label class="form-check-label">Banana</label>
+        <input type="checkbox" name="items" class="form-check-input" value="banana" />
+        <label class="form-check-label">Banana ($6.00)</label>
 
-        <input type="checkbox" name="items" class="form-check-input" value="orange">
-        <label class="form-check-label">Orange</label>
+        <input type="checkbox" name="items" class="form-check-input" value="orange" />
+        <label class="form-check-label">Orange ($4.00)</label>
 
     </div>
 
-    <input class="btn btn-primary mt-3" type="submit" value="Calculate total cost">
+    <input class="btn btn-primary mt-3" type="submit" value="Calculate total cost" />
 </form>
 
 {{#if totalCost}}
