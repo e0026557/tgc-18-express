@@ -20,6 +20,10 @@ app.use(express.urlencoded({
 const BASE_API_URL = 'https://ckx-movies-api.herokuapp.com/'; // Take note of the '/' at the end of the API endpoint!
 
 // ROUTES
+// NOTE: Typing in URL in the browser will always be a GET request
+// -> The URL in the first argument of app.get() or app.post() is for the browser/client to interact with our express app
+// -> axios.get etc in the function is used to communicate with the API (so we have to follow the API documentation)
+
 // Index route - show all movies
 app.get('/', async function(req, res) {
     // let url = BASE_API_URL + 'movies';
