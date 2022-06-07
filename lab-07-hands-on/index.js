@@ -64,13 +64,21 @@ app.post('/create-movie', async function(req, res) {
 
 
 // Update movie entry
-app.get('/update-movie', function(req, res) {
-    res.render('update-movie-form.hbs');
+app.get('/update-movie/:movie_id', async function(req, res) {
+    let movieId = req.params.movie_id;
+
+    // Get movie entry
+    let response = await axios.get(BASE_API_URL + 'movie/' + movieId);
+    let movie = response.data
+
+    res.render('update-movie-form.hbs', {
+        movie: movie
+    });
 })
 
-app.post('/update-movie', async function(req, res) {
-    let movieId = req.body.id;
-    let url = `${BASE_API_URL}movie/${movieId}`;
+app.post('/update-movie/:movie_id', async function(req, res) {
+    let movieId = req.params.movie_id;
+    let url = BASE_API_URL + 'movie/' + movieId;
     let data = {
         title: req.body.title,
         plot: req.body.plot
@@ -82,13 +90,20 @@ app.post('/update-movie', async function(req, res) {
 })
 
 // Delete movie entry
-app.get('/delete-movie', function(req, res) {
-    res.render('delete-movie-form.hbs');
+app.get('/delete-movie/:movie_id', async function(req, res) {
+    let movieId = req.params.movie_id;
+
+    let response = await axios.get(BASE_API_URL + 'movie/' + movieId);
+    let movie = response.data;
+
+    res.render('delete-movie-form.hbs', {
+        movie: movie
+    });
 })
 
-app.post('/delete-movie', async function(req, res) {
-    let movieId = req.body.id;
-    let url = `${BASE_API_URL}movie/${movieId}`;
+app.post('/delete-movie/:movie_id', async function(req, res) {
+    let movieId = req.params.movie_id;
+    let url = BASE_API_URL + 'movie/' + movieId;
     
     await axios.delete(url);
 

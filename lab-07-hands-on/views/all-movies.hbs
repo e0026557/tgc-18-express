@@ -9,6 +9,7 @@
             <th>ID</th>
             <th>Title</th>
             <th>Plot</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -18,6 +19,10 @@
             <td>{{this.id}}</td>
             <td>{{this.title}}</td>
             <td>{{this.plot}}</td>
+            <td>
+                <a href="/update-movie/{{this.id}}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="/delete-movie/{{this.id}}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
         </tr>
         {{/each}}
     </tbody>
