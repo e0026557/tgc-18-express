@@ -1,0 +1,18 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+
+<form method="post">
+    <h1>Deleting food sighting</h1>
+    <div class="alert alert-danger">
+        Are you sure you want to delete the food sighting
+        "{{foodSighting.description}}" which was added on {{foodSighting.datetime}}
+    </div>
+    <input type="submit" value="OK" class="btn btn-danger">
+
+    <!-- To create a 'pseudo' cancel button -->
+    <a href="/" class="btn btn-primary">Cancel</a>
+</form>
+
+{{/block}}
+{{/extends}}

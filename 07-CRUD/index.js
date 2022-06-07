@@ -28,6 +28,7 @@ app.use(express.urlencoded({
 // ROUTES
 const BASE_API_URL = 'https://ckx-restful-api.herokuapp.com'
 
+// READ
 app.get('/', async function(req, res) {
     let url = BASE_API_URL + '/sightings';
     let response = await axios.get(url);
@@ -42,11 +43,12 @@ app.get('/', async function(req, res) {
 // 1. Get a error post / ... 
 // 2. res.send(req.body)
 
-app.get('/food_sightings/create', function(req, res) {
+// CREATE
+app.get('/food_sighting/create', function(req, res) {
     res.render('food-form.hbs');
 })
 
-app.post('/food_sightings/create', async function(req, res) {
+app.post('/food_sighting/create', async function(req, res) {
     // Note: food must be an array according to the API documentation
     let data = {
         'description': req.body.description,
@@ -61,6 +63,8 @@ app.post('/food_sightings/create', async function(req, res) {
     res.redirect('/'); // telling the browser to go to '/' route 
 })
 
+
+// UPDATE
 app.get('/food_sighting/edit/:food_sighting_id', async function(req, res) {
     // 1. We need to know which piece of data to edit
     // -> need a unique identifier
@@ -79,6 +83,7 @@ app.get('/food_sighting/edit/:food_sighting_id', async function(req, res) {
 })
 
 app.post('/food_sighting/edit/:food_sighting_id', async function(req, res) {
+    // Note: req.body is an object that comes from the form in HTML
     let description = req.body.description;
     let food = req.body.food.split(','); // to get array
     let datetime = req.body.datetime;
@@ -98,7 +103,31 @@ app.post('/food_sighting/edit/:food_sighting_id', async function(req, res) {
     res.redirect('/');
 })
 
+// DELETE
+app.get('/food_sighting/delete/:food_sighting_id', async function(req, res) {
+    // 1. Get the id of the food sighting entry that we want to delete
+    let foodSightingId = req.params.food_sighting_id;
 
+    // 2. Get details of the food sighting entry that we are going to delete 
+    // -> for confirmation
+    let response = await axios.get(BASE_API_URL + '/sighting/' + foodSightingId);
+    let foodSighting = response.data;
+
+    // 3. Render a form asking the user to confirm deletion of the entry
+    res.render('confirm_delete', {
+        foodSighting: foodSighting
+    });
+
+})
+
+app.post('/food_sighting/delete/:food_sighting_id', async function(req, res) {
+    // 1. Get the id of the food sighting entry that we want to delete
+    let foodSightingId = req.params.food_sighting_id;
+
+    await axios.delete(BASE_API_URL + '/sighting/' + foodSightingId);
+    res.redirect('/');
+
+})
 
 // START SERVER
 app.listen(3000, function() {

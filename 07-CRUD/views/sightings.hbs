@@ -3,7 +3,7 @@
 
     <h1>Food Sightings</h1>
 
-    <a href="/food_sightings/create" class="btn btn-primary">Create food sightings</a>
+    <a href="/food_sighting/create" class="btn btn-primary">Create food sightings</a>
 
     <table class="table">
         <thead>
@@ -25,7 +25,8 @@
                     <td>{{this.food}}</td>
                     <td>{{this.datetime}}</td>
                     <td>
-                        <a href="/food_sighting/edit/{{this._id}}" class="btn btn-primary">Edit</a>
+                        <a href="/food_sighting/edit/{{this._id}}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="/food_sighting/delete/{{this._id}}" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             {{/each}}
