@@ -1,13 +1,10 @@
 const express = require('express');
 const hbs = require('hbs');
 const wax = require('wax-on');
-
-// We need the ./ in front of our own custom modules
-// because without it, NodeJS will assume that we are requiring from the node_modules folder
-// ./ means current folder
-// const {connect} = require('./MongoUtil'); // -> shortcut
-
-const MongoUtil = require('./MongoUtil');
+// require('mongodb') will return a Mongo object
+// the Mongo Client contains many other objects (also known as properties)
+// but we are only interested in the MongoClient
+const MongoClient = require('mongodb').MongoClient;
 
 // dotenv
 // a dotenv files also to create variables
@@ -29,15 +26,21 @@ wax.setLayoutPath('./views/layouts');
 // URI is mainly used for applications, URL is mainly used for websites
 const MONGO_URI = process.env.MONGO_URI;
 
-
-
-
 // Connect to the Mongo Database using the MongoClient
 async function main() {
-    // const db = await connect(MONGO_URI, 'sample_airbnb'); // -> with the shortcut method
-    const db = await MongoUtil.connect(MONGO_URI, 'sample_airbnb');
+    // MongoClient.connect function takes in 2 arguments
+    // 1. the connection string
+    // 2. an options object
+    const Client = await MongoClient.connect(MONGO_URI, {
+        'useUnifiedTopology': true // there were different versions of Mongo, when this is true, we don't have to care about 
+    });
 
-    app.get('/test', async function (req, res) {
+    // Connect to database before we setup the route so that everything is ready when route is loaded
+    const db = Client.db('sample_airbnb');
+
+
+
+    app.get('/test', async function(req, res) {
         // Use .toArray() to convert the results to an array of JavaScript objects
         let data = await db.collection('listingsAndReviews').find({}).toArray();
         res.send(data);
@@ -46,6 +49,6 @@ async function main() {
 
 main();
 
-app.listen(3000, function () {
+app.listen(3000, function() {
     console.log('Server started')
 })
