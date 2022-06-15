@@ -1,0 +1,28 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+    <h1>Add New Food Record</h1>
+
+    <form method="POST">
+        <div>
+            <label>Food name</label>
+            <input type="text" name="foodName" class="form-control">
+        </div>
+        <div>
+            <label>Calories</label>
+            <input type="text" name="calories" class="form-control">
+        </div>
+
+        <div>
+            <label>Tags</label>
+            <input type="checkbox" name="tags" id="" class="form-check-input" value="snack">
+            <label class="form-check-label">Snacks</label>
+            <input type="checkbox" name="tags" id="" class="form-check-input" value="healthy">
+            <label class="form-check-label">Healthy</label>
+        </div>
+
+    </form>
+
+
+{{/block}}
+{{/extends}}

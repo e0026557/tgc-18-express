@@ -1,0 +1,41 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+    <h1>Edit pet details</h1>
+    <form method="post">
+        <div class="mt-2">
+            <label>Name:</label>
+            <input type="text" name="name" class="form-control" value="{{pet.name}}">
+        </div>
+        <div class="mt-2">
+            <label>Breed:</label>
+            <input type="text" name="breed" class="form-control" value="{{pet.breed}}">
+        </div>
+        <div class="mt-2">
+            <label>Description:</label>
+            <input type="text" name="description" class="form-control" value="{{pet.description}}">
+        </div>
+        <div class="mt-2">
+            <label>Age:</label>
+            <input type="text" name="age" class="form-control" value="{{pet.age}}">
+        </div>
+        <div class="mt-2">
+            <label>Problems:</label>
+            <input type="text" name="problems" class="form-control" value"{{pet.problems}}">
+        </div>
+
+        <div class="mt-2">
+            <label>Tags:</label>
+
+            <input class="form-check-input" type="checkbox" name="tags" id="" value="cat-friendly">
+            <label class="form-check-label">Cat-Friendly</label>
+
+            <input class="form-check-input" type="checkbox" name="tags" id="" value="scared-of-loud-noises">
+            <label class="form-check-label">Scared of loud noises</label>
+        </div>
+
+        <input type="submit" value="Add pet" class="btn btn-primary mt-4">
+    </form>
+
+{{/block}}
+{{/extends}}
