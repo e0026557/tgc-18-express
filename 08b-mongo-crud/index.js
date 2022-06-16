@@ -161,6 +161,121 @@ async function main() {
             '_id': ObjectId(id)
         });
         res.redirect('/');
+    });
+
+    // Route to display form for adding notes
+    app.get('/food/:foodid/notes/add', async function(req, res) {
+        // let foodRecord = await getFoodRecordById(req.params.foodid);
+        let foodRecord = await db.collection('food_records').find({
+            '_id': ObjectId(req.params.foodid)
+        }, {
+            // projection is to select a few fields from the document to display
+            'projection': {
+                'food': 1
+            }
+        });
+
+        res.render('add-note.hbs', {
+            'foodRecord': foodRecord
+        })
+    });
+
+    // Route to process form
+    app.post('/food/:foodid/notes/add', async function(req,res){
+        await db.collection('food_records').updateOne({
+            // which document to update
+            '_id': ObjectId(req.params.foodid)
+        }, {
+            // what we want to do with the document
+            '$push': {
+                // notes array (if does not exist, mongodb will create a new array)
+                'notes': {
+                    '_id': ObjectId(), // if ObjectId has no argument then MongoDB will create a new unique ID
+                    'content': req.body.content
+                }
+            }
+        });
+
+        res.redirect('/food/'+ req.params.foodid + '/notes');
+    })
+
+    app.get('/food/:foodid/notes', async function(req, res){
+        let foodRecord = await getFoodRecordById(req.params.foodid);
+        res.render('show-notes.hbs', {
+            'foodRecord': foodRecord
+        });
+    })
+
+    app.get('/food/:foodid/notes/:noteid/update', async function(req, res) {
+        // findOne() will only work return main document, but not the sub-document alone
+        // -> need to use projection to get the sub-document
+        let foodRecord = await db.collection('food_records').findOne({
+            '_id': ObjectId(req.params.foodid)
+        }, {
+            'projection': {
+                'notes': {
+                    // Only show the element in the array that matches the criteria
+                    '$elemMatch': {
+                        '_id': ObjectId(req.params.noteid)
+                    }
+                }
+            }
+        });
+
+        let noteToEdit = foodRecord.notes[0];
+        res.render('edit-note.hbs', {
+            'content': noteToEdit.content
+        });
+
+    });
+
+
+    app.post('/food/:foodid/notes/:noteid/update', async function(req, res) {
+        // Get new note content
+        let newContent = req.body.content;
+
+        await db.collection('food_records').updateOne({
+            '_id': ObjectId(req.params.foodid),
+            'notes._id': ObjectId(req.params.noteid)
+        }, {
+            '$set': {
+                // The $ sign will refer to the notes at the top
+                'notes.$.content': newContent
+            }
+        });
+
+        res.redirect(`/food/${req.params.foodid}/notes`);
+    });
+
+
+    app.get('/food/:foodid/notes/:noteid/delete', async function(req, res){
+        let foodRecord = await db.collection('food_records').findOne({
+            '_id': ObjectId(req.params.foodid),
+            'notes._id': ObjectId(req.params.noteid)
+        }, {
+            'projection': {
+                'notes.$': 1
+            }
+        });
+
+        let noteToDelete = foodRecord.notes[0];
+        res.render('delete-note.hbs', {
+            'note': noteToDelete
+        });
+    })
+
+    app.post('/food/:foodid/notes/:noteid/delete', async function(req, res) {
+        await db.collection('food_records').updateOne({
+            '_id': ObjectId(req.params.foodid)
+        }, {
+            '$pull': {
+                'notes': {
+                    '_id': ObjectId(req.params.noteid)
+                }
+            }
+        })
+
+        res.redirect(`/food/${req.params.foodid}/notes`);
     })
 }
 

@@ -1,0 +1,21 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+<h1>{{foodRecord.food}} <a href="/food/{{foodRecord._id}}/notes/add" class="btn btn-primary">Add New Note</a></h1>
+
+<!-- Iterate each element in notes array -> object (note) -->
+{{#each foodRecord.notes}}
+<div class="card">
+    <div class="card-body">
+        {{this.content}}
+        <div class="mt-3">
+            <!-- id of main document (food) and id of sub document (note)  -->
+            <!-- use ../ to refer to a hbs variable that is not in the scope  -->
+            <a href="/food/{{../foodRecord._id}}/notes/{{this._id}}/update" class="btn btn-primary btn-sm">Update</a>
+            <a href="/food/{{../foodRecord._id}}/notes/{{this._id}}/delete" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{/block}}
+{{/extends}}
