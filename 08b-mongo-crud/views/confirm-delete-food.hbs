@@ -1,0 +1,15 @@
+{{#extends 'base'}}
+{{#block}}
+<form method="post">
+<div class="alert alert-danger">
+    Are you sure you want to delete {{foodRecord.food}} ?
+</div>
+
+<a href="/" class="btn btn-success">Cancel</a>
+<input type="submit" value="Delete" class="btn btn-danger">
+</form>
+
+
+
+{{/block}}
+{{/extends}}

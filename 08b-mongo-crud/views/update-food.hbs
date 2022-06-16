@@ -1,0 +1,31 @@
+{{#extends 'base'}}
+{{#block 'content'}}
+
+    <h1>Add New Food Record</h1>
+
+    <form method="POST">
+        <div>
+            <label>Food name</label>
+            <input type="text" name="foodName" class="form-control" value="{{foodRecord.food}}">
+        </div>
+        <div>
+            <label>Calories</label>
+            <input type="text" name="calories" class="form-control" value="{{foodRecord.calories}}">
+        </div>
+
+        <div>
+            <!-- Use #inArray for checkboxes and #equals for radio buttons -->
+            <label>Tags</label>
+            <input type="checkbox" name="tags" id="" class="form-check-input" value="snack" {{#inArray foodRecord.tags "snack"}} checked {{/inArray}}>
+            <label class="form-check-label">Snacks</label>
+            <input type="checkbox" name="tags" id="" class="form-check-input" value="healthy" {{#inArray foodRecord.tags "healthy"}} checked {{/inArray}}>
+            <label class="form-check-label">Healthy</label>
+            <input type="checkbox" name="tags" id="" class="form-check-input" value="homecooked" {{#inArray foodRecord.tags "homecooked"}} checked {{/inArray}}>
+            <label class="form-check-label">Home-cooked</label>
+        </div>
+
+    </form>
+
+
+{{/block}}
+{{/extends}}

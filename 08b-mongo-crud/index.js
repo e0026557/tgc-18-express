@@ -9,10 +9,17 @@ const wax = require('wax-on');
 
 const MongoUtil = require('./MongoUtil');
 
+const ObjectId = require('mongodb').ObjectId;
+
 // dotenv
 // a dotenv files also to create variables
 // when we run config on the dotenv, all variables defined in 
 const dotenv = require('dotenv').config();
+
+// require in handlesbars-helpers
+const helpers = require('handlebars-helpers')({
+    'handlesbars': hbs.handlebars
+})
 
 // process is a NodeJS object available to all NodeJS programs
 // -> Do not name any variables as 'process'
@@ -33,10 +40,31 @@ app.use(express.urlencoded({
 // URI is mainly used for applications, URL is mainly used for websites
 const MONGO_URI = process.env.MONGO_URI;
 
+function getCheckboxValues(rawTags) {
+    let tags = [];
+    if (Array.isArray(rawTags)) {
+        tags = rawTags;
+    }
+    else if (rawTags) {
+        tags = [rawTags];
+    }
+    return tags;
+}
+
+
 // Connect to the Mongo Database using the MongoClient
 async function main() {
     // const db = await connect(MONGO_URI, 'sample_airbnb'); // -> with the shortcut method
     const db = await MongoUtil.connect(MONGO_URI, 'tgc18-cico');
+    
+    async function getFoodRecordById(id) {
+        // Be sure to provide id as ObjectId when searching for document by its ID
+        let foodRecord = await db.collection('food_records').findOne({
+            '_id': ObjectId(id)
+        })
+    
+        return foodRecord;
+    }
 
     app.get('/test', async function (req, res) {
         // Use .toArray() to convert the results to an array of JavaScript objects
@@ -80,6 +108,58 @@ async function main() {
         };
 
         await db.collection('food_records').insertOne(foodDocument);
+        res.redirect('/');
+    })
+
+    app.get('/update-food/:id', async function (req, res) {
+        let id = req.params.id;
+        // Be sure to provide id as ObjectId when searching for document by its ID
+        let foodRecord = await db.collection('food_records').findOne({
+            '_id': ObjectId(id)
+        })
+        res.render('update-food.hbs', {
+            'foodRecord': foodRecord
+        });
+    })
+
+    app.post('/update-food/:id', async function (req, res) {
+        let id = req.params.id;
+        // The new key value pair we are going to use to update the document
+        let updatedFoodRecord = {
+            'food': req.body.foodRecordName,
+            'calories': req.body.calories,
+            'tags': getCheckboxValues(req.body.tags)
+        }
+
+        // update the food document
+        // -> take note to use the $set to provide the new updated document
+        await db.collection('food_records').updateOne({
+            '_id': ObjectId(id)
+        }, {
+            '$set': updatedFoodRecord
+        });
+
+        res.redirect('/');
+    });
+
+
+    // route to delete
+    app.get('/delete-food/:id', async function (req, res) {
+        let id = req.params.id;
+
+        // find document we are going to delete
+        let foodRecord = await getFoodRecordById(id);
+
+        res.render('confirm-delete-food', {
+            'foodRecord': foodRecord
+        })
+    });
+
+    app.post('/delete-food/:id', async function(req, res) {
+        let id = req.params.id;
+        await db.collection('food_records').deleteOne({
+            '_id': ObjectId(id)
+        });
         res.redirect('/');
     })
 }

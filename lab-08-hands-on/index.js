@@ -83,9 +83,10 @@ async function main() {
 
     // Route to display form to update pet details
     app.get('/update-pet/:petId', async function(req, res) {
+        let id = req.params.petId;
         // Get current pet details
         let pet = await db.collection('pets').find({
-            '_id': ObjectId(req.params.petId)
+            '_id': ObjectId(id)
         }).toArray();
 
         res.render('update-pet.hbs', {
