@@ -21,20 +21,35 @@
         </div>
         <div class="mt-2">
             <label>Problems:</label>
-            <input type="text" name="problems" class="form-control" value"{{pet.problems}}">
+            <input type="text" name="problems" class="form-control" value="{{pet.problems}}">
         </div>
 
         <div class="mt-2">
             <label>Tags:</label>
 
-            <input class="form-check-input" type="checkbox" name="tags" id="" value="cat-friendly">
-            <label class="form-check-label">Cat-Friendly</label>
+            <input class="form-check-input" type="checkbox" name="tags" id="" value="house-broken" {{#inArray pet.tags 'house-broken'}} checked {{/inArray}}>
+            <label class="form-check-label">House-broken</label>
 
-            <input class="form-check-input" type="checkbox" name="tags" id="" value="scared-of-loud-noises">
-            <label class="form-check-label">Scared of loud noises</label>
+            <input class="form-check-input" type="checkbox" name="tags" id="" value="vaccinated" {{#inArray pet.tags 'vaccinated'}} checked {{/inArray}}>
+            <label class="form-check-label">Vaccinated</label>
+
+            <input class="form-check-input" type="checkbox" name="tags" id="" value="chipped" {{#inArray pet.tags 'chipped'}} checked {{/inArray}}>
+            <label class="form-check-label">Chipped</label>
+
+            <input class="form-check-input" type="checkbox" name="tags" id="" value="fixed" {{#inArray pet.tags 'fixed'}} checked {{/inArray}}>
+            <label class="form-check-label">Fixed</label>
         </div>
 
-        <input type="submit" value="Add pet" class="btn btn-primary mt-4">
+        <div class="mt-2">
+            <label>HDB-approved?</label>
+            <input class="form-check-input" type="radio" name="approved" value="true" {{#eq pet.approved 'true'}}checked{{/eq}}>
+            <label class="form-check-label">True</label>
+
+            <input class="form-check-input" type="radio" name="approved" value="false" {{#eq pet.approved 'false'}}checked{{/eq}}>
+            <label class="form-check-label">False</label>
+        </div>
+
+        <input type="submit" value="Edit pet details" class="btn btn-primary mt-4">
     </form>
 
 {{/block}}

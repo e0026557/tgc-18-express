@@ -3,13 +3,16 @@
 
     <h1>All Pets</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Breed</th>
                 <th>Age</th>
                 <th>Description</th>
+                <th>Problems</th>
+                <th>HDB Approved?</th>
+                <th>Tags</th>
                 <th></th>
             </tr>
         </thead>
@@ -20,8 +23,12 @@
                     <td>{{this.breed}}</td>
                     <td>{{this.age}}</td>
                     <td>{{this.description}}</td>
+                    <td>{{this.problems}}</td>
+                    <td>{{this.approved}}</td>
+                    <td>{{this.tags}}</td>
                     <td>
                         <a href="/update-pet/{{this._id}}" class="btn btn-primary">Edit</a>
+                        <a href="/delete-pet/{{this._id}}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             {{/each}}

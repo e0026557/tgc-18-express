@@ -16,9 +16,9 @@ const ObjectId = require('mongodb').ObjectId;
 // when we run config on the dotenv, all variables defined in 
 const dotenv = require('dotenv').config();
 
-// require in handlesbars-helpers
+// require in handlebars-helpers
 const helpers = require('handlebars-helpers')({
-    'handlesbars': hbs.handlebars
+    'handlebars': hbs.handlebars
 })
 
 // process is a NodeJS object available to all NodeJS programs
