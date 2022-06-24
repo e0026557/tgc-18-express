@@ -76,9 +76,6 @@ async function main() {
     // -> use an external program to test (Eg ARC, or POSTMAN)
     // To protect this route (deny unauthorized user), we have to provide a way for the access token to be provided 
     app.post('/food_sightings', checkIfAuthenticated, async function(req, res) {
-        
-
-
         // TODO: validation 
         // -> need to make sure that req.body is at least an array etc
         let description = req.body.description;
