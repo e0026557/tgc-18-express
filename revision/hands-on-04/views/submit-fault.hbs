@@ -1,0 +1,31 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+    Submit a Fault
+{{/block}}
+
+{{#block 'content'}}
+    
+    <h1 class="mt-5">Submit a Fault</h1>
+
+    <form method="post">
+        <div class="mt-3">
+            <label>Name:</label>
+            <input type="text" name="name" class="form-control" placeholder="John Smith">
+        </div>
+        <div class="mt-3">
+            <label>Location of fault:</label>
+            <input type="text" name="location" class="form-control" placeholder="Eg. Building 2">
+        </div>
+        <div class="mt-3">
+            <label>Description of fault:</label>
+            <textarea class="form-control" name="description" cols="30" rows="10" placeholder="Enter description of fault here."></textarea>
+        </div>
+
+        <input type="submit" class="btn btn-primary mt-4" value="Submit">
+    </form>
+
+{{/block}}
+
+
+{{/extends}}
