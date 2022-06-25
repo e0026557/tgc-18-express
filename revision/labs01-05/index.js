@@ -16,6 +16,11 @@ app.use(express.static('public'));
 wax.on(hbs.handlebars);
 wax.setLayoutPath('./views/layouts'); // -> where to get the templates from
 
+// Registering own helper
+hbs.handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+})
+
 // ROUTES
 app.get('/', (req, res) => {
     res.send('<h1>Hello from Express</h1>');
@@ -31,6 +36,18 @@ app.get('/hello/:name', (req, res) => {
     let name = req.params.name;
     res.send(`Hello, ${name}`);
 });
+
+// Lab 5
+app.get('/fruits', function(req,res) {
+    let favorite = 'apples';
+
+    res.render('fruits.hbs', {
+        'fruits': ['apples', 'bananas', 'oranges'],
+        'favoriteFruit': favorite
+    });
+});
+
+
 
 // START SERVER
 app.listen(3000, ()=> {
