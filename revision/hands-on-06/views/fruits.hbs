@@ -1,0 +1,40 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Fruits
+{{/block}}
+
+{{#block 'content'}}
+
+    <h1>Fruits</h1>
+
+    <form method="post">
+        <div class="mt-3">
+            <label>Select fruit(s):</label>
+
+            <input type="checkbox" name="fruits" id="apple" value="apple" class="form-check-input">
+            <label for="apple" class="form-check-label">Apple</label>
+
+            <input type="checkbox" name="fruits" id="durian" value="durian" class="form-check-input">
+            <label for="durian" class="form-check-label">Durian</label>
+
+            <input type="checkbox" name="fruits" id="orange" value="orange" class="form-check-input">
+            <label for="orange" class="form-check-label">Orange</label>
+
+            <input type="checkbox" name="fruits" id="banana" value="banana" class="form-check-input">
+            <label for="banana" class="form-check-label">Banana</label>
+        </div>
+
+        <input type="submit" value="Calculate total cost" class="btn btn-primary mt-4">
+
+    </form>
+
+    {{#if totalCost}}
+        <div class="mt-3">
+            <p>Total cost is ${{totalCost}}</p>
+        </div>
+    {{/if}}
+
+{{/block}}
+
+{{/extends}}

@@ -1,0 +1,46 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Calculate BMI
+{{/block}}
+
+
+{{#block 'content'}}
+
+    <h1>Calculate BMI</h1>
+
+    <form method="post">
+
+        <div class="mt-3">
+            <label>Select units:</label>
+
+            <input type="radio" name="unit" id="metric" value="metric" class="form-check-input" checked>
+            <label for="metric" class="form-check-label">Metric</label>
+            
+            <input type="radio" name="unit" id="imperial" value="imperial" class="form-check-input">
+            <label for="imperial" class="form-check-label">Imperial</label>
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Enter weight in <span id="unitWeight"></span>:</label>
+            <input type="text" name="weight" class="form-control">
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Enter height in <span id="unitHeight"></span>:</label>
+            <input type="text" name="height" class="form-control">
+        </div>
+
+        <input type="submit" value="Calculate" class="btn btn-primary mt-4">
+    </form>
+
+    {{#if bmiResult}}
+        <div class="mt-3">
+            <p>Your BMI is <span>{{bmiResult}}</span>.</p>
+        </div>
+    {{/if}}
+
+{{/block}}
+
+
+{{/extends}}
