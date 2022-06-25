@@ -21,6 +21,12 @@ hbs.handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
     return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 })
 
+// Enable form processing
+app.use(express.urlencoded({
+    extended: false
+}));
+
+
 // ROUTES
 app.get('/', (req, res) => {
     res.send('<h1>Hello from Express</h1>');
@@ -48,6 +54,33 @@ app.get('/fruits', function(req,res) {
 });
 
 
+// Lab 6
+app.get('/add-food', (req, res) => {
+    res.render('add-food.hbs');
+});
+
+// -> route to handle form
+app.post('/add-food', (req, res) => {
+    // Extract form information
+    let {foodName, calories, tags} = req.body;
+
+    // Format tags into array
+    // Reason for formatting into array:
+    // -> if no input, tags will be undefined
+    // -> if only one input, tags will be a single value
+    // -> if multiple inputs, tags will be an array of values
+
+    tags = tags ? tags : []; // -> if no inputs, change to empty array
+    if (!Array.isArray(tags)) {
+        tags = [tags]; // -> if not an array, change to an array
+    }
+    
+    res.render('display-food-summary', {
+        foodName,
+        calories,
+        tags: tags.join(', ')
+    });
+});
 
 // START SERVER
 app.listen(3000, ()=> {
