@@ -90,6 +90,28 @@ app.post('/:sighting_id/update', async function(req, res) {
     res.redirect('/');
 });
 
+// LAB 7D : DELETE
+// -> route to ask user to confirm deletion of a sighting
+app.get('/:sighting_id/delete', async function(req, res) {
+    // Get details of sighting to be deleted
+    let response = await axios.get(BASE_API_URL + 'sighting/' + req.params.sighting_id);
+    let sightings = response.data;
+
+    res.render('delete-sightings.hbs', {
+        sightings
+    });
+});
+
+// -> route to process form
+app.post('/:sighting_id/delete', async function(req, res) {
+    // Delete food sighting
+    await axios.delete(BASE_API_URL + 'sighting/' + req.params.sighting_id);
+
+    // Redirect to homepage
+    res.redirect('/');
+});
+
+
 // START SERVER
 app.listen(3000, function() {
     console.log('Server has started.');
