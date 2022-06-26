@@ -10,6 +10,9 @@ yarn add express
 # Install handlebars for Express
 yarn add hbs
 
+# Install handlebars-helpers
+yarn add handlebars-helpers
+
 # Install wax-on for template inheritance
 yarn add wax-on
 

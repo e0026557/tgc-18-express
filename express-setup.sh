@@ -16,6 +16,10 @@ yarn add express
 yarn add hbs
 mkdir views
 
+# Install handlebars-helpers
+# IMPORTANT: Remember to set up handlebars-helpers
+yarn add handlebars-helpers
+
 # Create 'public' directory for static files
 # IMPORTANT: Remember to register the 'public' folder with Express
 mkdir public
