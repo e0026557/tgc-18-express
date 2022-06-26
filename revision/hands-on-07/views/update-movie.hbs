@@ -1,0 +1,28 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Update movie
+{{/block}}
+
+{{#block 'content'}}
+
+    <h1>Update movie</h1>
+
+    <form method="post">
+        <div class="mt-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" value="{{movie.title}}">
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Plot</label>
+            <textarea name="plot" cols="30" rows="10" class="form-control">{{movie.plot}}</textarea>
+        </div>
+
+        <input type="submit" value="Update movie" class="btn btn-primary mt-5">
+
+    </form>
+
+{{/block}}
+
+{{/extends}}

@@ -1,0 +1,27 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Create new movie
+{{/block}}
+
+{{#block 'content'}}
+
+    <h1>Create new movie</h1>
+
+    <form method="post">
+        <div class="mt-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Plot</label>
+            <textarea name="plot" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+
+        <input type="submit" value="Add new movie" class="btn btn-primary mt-5">
+    </form>
+
+{{/block}}
+
+{{/extends}}
