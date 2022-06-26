@@ -1,0 +1,32 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Update Food Sightings
+{{/block}}
+
+{{#block 'content'}}
+    
+    <h1>Update Food Sightings</h1>
+
+    <form method="post">
+        <div class="mt-3">
+            <label class="form-label">Description:<label>
+            <input type="text" name="description" class="form-control" value="{{sightings.description}}">
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Food:<label>
+            <input type="text" name="food" class="form-control" value="{{sightings.food}}">
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Date time:<label>
+            <input type="datetime-local" name="datetime" class="form-control" value="{{sightings.datetime}}">
+        </div>
+
+        <input type="submit" value="Update Food Sightings" class="btn btn-primary mt-5">
+    </form>
+
+{{/block}}
+
+{{/extends}}

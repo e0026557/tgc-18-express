@@ -1,0 +1,35 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Food Sightings
+{{/block}}
+
+{{#block 'content'}}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Food</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{!-- Iterate each sighting object in sightings array --}}
+            {{#each sightings}}
+                <tr>
+                    <td>{{this._id}}</td>
+                    <td>{{this.description}}</td>
+                    <td>{{this.food}}</td>
+                    <td>
+                        <a href="/{{this._id}}/update" class="btn btn-primary btn-sm">Update</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+{{/block}}
+
+{{/extends}}
