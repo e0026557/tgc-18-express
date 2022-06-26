@@ -1,0 +1,52 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Add new animal
+{{/block}}
+
+{{#block 'content'}}
+
+    <h1>Add new animal</h1>
+
+    <form method="post">
+        <div class="mt-3">
+            <label class="form-label">Name:</label>
+            <input type="text" name="name" class="form-control">
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Age:</label>
+            <input type="number" name="age" class="form-control">
+        </div>
+
+        <div class="mt-3">
+            <select name="type" class="form-select">
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="hamster">Hamster</option>
+                <option value="rabbit">Rabbit</option>
+                <option value="others">Others</option>
+            </select>
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Gender:</label>
+
+            <input type="radio" name="gender" value="male" id="male" class="form-check-input">
+            <label for="male" class="form-check-label">Male</label>
+
+            <input type="radio" name="gender" value="female" id="female" class="form-check-input">
+            <label for="female" class="form-check-label">Female</label>
+        </div>
+
+        <div class="mt-3">
+            <textarea name="notes" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+
+        <input type="submit" value="Add animal" class="btn btn-primary mt-5">
+
+    </form>
+
+{{/block}}
+
+{{/extends}}

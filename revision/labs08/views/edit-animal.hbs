@@ -1,0 +1,52 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Edit animal details
+{{/block}}
+
+{{#block 'content'}}
+
+<h1>Edit animal details</h1>
+
+<form method="post">
+    <div class="mt-3">
+        <label class="form-label">Name:</label>
+        <input type="text" name="name" class="form-control" value="{{animalRecord.name}}">
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Age:</label>
+        <input type="number" name="age" class="form-control" value="{{animalRecord.age}}">
+    </div>
+
+    <div class="mt-3">
+        <select name="type" class="form-select">
+            <option value="dog" {{#eq animalRecord.type 'dog' }}selected{{/eq}}>Dog</option>
+            <option value="cat" {{#eq animalRecord.type 'cat' }}selected{{/eq}}>Cat</option>
+            <option value="hamster" {{#eq animalRecord.type 'hamster' }}selected{{/eq}}>Hamster</option>
+            <option value="rabbit" {{#eq animalRecord.type 'rabbit' }}selected{{/eq}}>Rabbit</option>
+            <option value="others" {{#eq animalRecord.type 'others' }}selected{{/eq}}>Others</option>
+        </select>
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Gender:</label>
+
+        <input type="radio" name="gender" value="male" id="male" class="form-check-input" {{#eq animalRecord.gender 'male'}}checked{{/eq}}>
+        <label for="male" class="form-check-label">Male</label>
+
+        <input type="radio" name="gender" value="female" id="female" class="form-check-input" {{#eq animalRecord.gender 'female'}}checked{{/eq}}>
+        <label for="female" class="form-check-label">Female</label>
+    </div>
+
+    <div class="mt-3">
+        <textarea name="notes" cols="30" rows="10" class="form-control">{{animalRecord.notes}}</textarea>
+    </div>
+
+    <input type="submit" value="Edit animal" class="btn btn-primary mt-5">
+
+</form>
+
+{{/block}}
+
+{{/extends}}

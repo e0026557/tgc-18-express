@@ -1,0 +1,42 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+All animals
+{{/block}}
+
+{{#block 'content'}}
+
+    <h1>All animals</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Type</th>
+                <th>Gender</th>
+                <th>Notes</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each animalRecords}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.age}}</td>
+                    <td>{{this.type}}</td>
+                    <td>{{this.gender}}</td>
+                    <td>{{this.notes}}</td>
+                    <td>
+                        <a href="/animal/{{this._id}}/update" class="btn btn-primary btn-sm">Update</a>
+                        <a href="/animal/{{this._id}}/delete" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+{{/block}}
+
+{{/extends}}
