@@ -4,6 +4,7 @@ const cors = require('cors');
 const MongoUtil = require('./MongoUtil');
 const ObjectId = require('mongodb').ObjectId;
 require('dotenv').config();
+const jwt = require('jsonwebtoken');
 
 // Initialise Express app
 const app = express();
@@ -13,6 +14,38 @@ app.use(express.json());
 
 // Enable CORS
 app.use(cors());
+
+
+// FUNCTIONS
+function generateAccessToken(id, email) {
+  return jwt.sign({
+    'user_id': id,
+    'email': email
+  }, process.env.TOKEN_SECRET, {
+    expiresIn: '1h'
+  });
+}
+
+// MIDDLEWARE
+const checkIfAuthenticatedJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+
+      req.user = user;
+      next();
+    })
+  }
+  else {
+    res.sendStatus(401);
+  }
+}
 
 // Main Function
 async function main() {
@@ -110,6 +143,44 @@ async function main() {
     })
   })
 
+
+  // ROUTE FOR REGISTRATION OF USERS
+  app.post('/users', async function(req, res) {
+    let result = await db.collection('users').insertOne({
+      'email': req.body.email,
+      'password': req.body.password
+    });
+
+    res.status(201); // created
+    res.json({
+      'message': "New user account"
+    })
+  })
+
+
+  // ROUTE TO GENERATE JWT TOKEN
+  app.post('/login', async function(req, res) {
+    let user = await db.collection('users').findOne({
+      email: req.body.email,
+      password: req.body.password
+    });
+
+    if (user) {
+      let accessToken = generateAccessToken(user._id, user.email);
+      res.send({accessToken});
+    }
+    else {
+      res.send({
+        error: 'Authentication error'
+      });
+    }
+  })
+
+
+  // ROUTE TO RETURN USER PROFILE
+  app.get('/profile', checkIfAuthenticatedJWT, async function(req, res) {
+    res.send(req.user);
+  })
 
 }
 
