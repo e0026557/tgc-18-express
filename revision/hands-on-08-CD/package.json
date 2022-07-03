@@ -1,6 +1,7 @@
 {
-  "name": "labs08",
+  "name": "labs08-cd",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +18,5 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.7.0",
     "wax-on": "^1.2.2"
-  },
-  "description": ""
+  }
 }

@@ -1,0 +1,46 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+All Pets
+{{/block}}
+
+{{#block 'content'}}
+
+<h1>All Pets</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Breed</th>
+      <th>Description</th>
+      <th>Age</th>
+      <th>Problems</th>
+      <th>Tags</th>
+      <th>HDB Approved</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each petRecords}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{this.breed}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.age}}</td>
+      <td>{{this.problems}}</td>
+      <td>{{this.tags}}</td>
+      <td>{{this.hdbApproved}}</td>
+      <td>
+        <a href="/pets/{{this._id}}" class="btn btn-sm btn-primary mx-1">More Info</a>
+        <a href="/pets/{{this._id}}/update" class="btn btn-sm btn-primary mx-1">Update</a>
+        <a href="/pets/{{this._id}}/delete" class="btn btn-sm btn-danger mx-1">Delete</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{/block}}
+
+{{/extends}}

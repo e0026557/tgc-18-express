@@ -1,0 +1,83 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Update Fault
+{{/block}}
+
+{{#block 'content'}}
+  <h1>Update Fault</h1>
+
+  <form method="post">
+    <div class="mt-3">
+      <label>Title</label>
+      <input type="text" name="title" class="form-control" value="{{faultRecord.title}}" readonly>
+    </div>
+    <div class="mt-3">
+      <label>Location:</label>
+      <input type="text" name="location" class="form-control" value="{{faultRecord.location}}" readonly>
+    </div>
+    <div class="mt-3">
+      <label>Tags:</label>
+
+      <input type="checkbox" name="tags" class="form-check-input" id="urgent" value="urgent" {{#inArray faultRecord.tags 'urgent'}}checked{{/inArray}} disabled>
+      <label for="urgent" class="form-check-label">Urgent</label>
+
+      <input type="checkbox" name="tags" class="form-check-input" id="dangerous" value="dangerous" {{#inArray faultRecord.tags 'dangerous'}}checked{{/inArray}} disabled>
+      <label for="dangerous" class="form-check-label">Dangerous</label>
+
+      <input type="checkbox" name="tags" class="form-check-input" id="equipment-fault" value="equipment-fault" {{#inArray faultRecord.tags 'equipment-fault'}}checked{{/inArray}} disabled>
+      <label for="equipment-fault" class="form-check-label">Equipment Fault</label>
+
+      <input type="checkbox" name="tags" class="form-check-input" id="maintenance-related" value="maintenance-related" {{#inArray faultRecord.tags 'maintenance-related'}}checked{{/inArray}} disabled>
+      <label for="maintenance-related" class="form-check-label">Maintenance Related</label>
+
+      <input type="checkbox" name="tags" class="form-check-input" id="infrastructure-related" value="infrastructure-related" {{#inArray faultRecord.tags 'infrastructure-related'}}checked{{/inArray}} disabled>
+      <label for="infrastructure-related" class="form-check-label">Infrastructure Related</label>
+    </div>
+    <div class="mt-3">
+      <label>Block Number:</label>
+
+      <input type="radio" name="block" class="form-check-input" id="b304" value="304" {{#eq faultRecord.block '304'}}checked{{/eq}} disabled>
+      <label for="b304" class="form-check-label">304</label>
+      <input type="radio" name="block" class="form-check-input" id="b305" value="305" {{#eq faultRecord.block '305'}}checked{{/eq}} disabled>
+      <label for="b305" class="form-check-label">305</label>
+
+      <input type="radio" name="block" class="form-check-input" id="b306" value="306" {{#eq faultRecord.block '306'}}checked{{/eq}} disabled>
+      <label for="b306" class="form-check-label">306</label>
+
+      <input type="radio" name="block" class="form-check-input" id="b307" value="307" {{#eq faultRecord.block '307'}}checked{{/eq}} disabled>
+      <label for="b307" class="form-check-label">307</label>
+
+      <input type="radio" name="block" class="form-check-input" id="b307A" value="307A" {{#eq faultRecord.block '307A'}}checked{{/eq}} disabled>
+      <label for="b307A" class="form-check-label">307A</label>
+    </div>
+    <div class="mt-3">
+      <label>Name of reporter:</label>
+      <input type="text" name="name" class="form-control" value="{{faultRecord.name}}" readonly>
+    </div>
+    <div class="mt-3">
+      <label>Email:</label>
+      <input type="text" name="email" class="form-control" value="{{faultRecord.email}}" readonly>
+    </div>
+
+    <div class="mt-3">
+      <label>Follow up:</label>
+      <input type="checkbox" name="followUp" class="form-check-input" {{#eq faultRecord.followUp 'true'}}checked{{/eq}}>
+    </div>
+
+    <div class="mt-3">
+      <label>Resolved:</label>
+      <input type="checkbox" name="resolved" class="form-check-input" {{#eq faultRecord.resolved 'true'}}checked{{/eq}}>
+    </div>
+
+    <div class="mt-3">
+      <label>Comments:</label>
+      <textarea name="comment" cols="30" rows="10" class="form-control">{{faultRecord.comment}}</textarea>
+    </div>
+
+    <input type="submit" value="Update report" class="btn btn-primary mt-4">
+  </form>
+
+{{/block}}
+
+{{/extends}}

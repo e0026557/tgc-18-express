@@ -34,7 +34,6 @@ async function main() {
 
     // Connect to Mongo
     const db = await MongoUtil.connect(MONGO_URI, 'cico');
-    const dbExercise = await MongoUtil.connect(MONGO_URI, 'animal_shelter');
 
     // ROUTES
     app.get('/', function(req, res) {

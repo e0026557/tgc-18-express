@@ -1,0 +1,63 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Add New Pet
+{{/block}}
+
+{{#block 'content'}}
+  <h1>Add New Pet</h1>
+
+  <form method="post">
+    <div class="mt-3">
+      <label>Name:</label>
+      <input type="text" name="name" class="form-control">
+    </div>
+    <div class="mt-3">
+      <label>Breed:</label>
+      <input type="text" name="breed" class="form-control">
+    </div>
+    <div class="mt-3">
+      <label>Description:</label>
+      <input type="text" name="description" class="form-control">
+    </div>
+    <div class="mt-3">
+      <label>Age:</label>
+      <input type="text" name="age" class="form-control">
+    </div>
+    <div class="mt-3">
+      <label>Problems:</label>
+      <input type="text" name="problems" class="form-control">
+    </div>
+
+    <div class="mt-3">
+      <label>Tags:</label>
+
+      <input type="checkbox" name="tags" id="house-broken" value="house-broken" class="form-check-input">
+      <label for="house-broken" class="form-check-label">House-broken</label>
+      
+      <input type="checkbox" name="tags" id="vaccinated" value="vaccinated" class="form-check-input">
+      <label for="vaccinated" class="form-check-label">Vaccinated</label>
+
+      <input type="checkbox" name="tags" id="chipped" value="chipped" class="form-check-input">
+      <label for="chipped" class="form-check-label">Chipped</label>
+
+      <input type="checkbox" name="tags" id="fixed" value="fixed" class="form-check-input">
+      <label for="fixed" class="form-check-label">Fixed</label>
+    </div>
+
+    <div class="mt-3">
+      <label>HDB Approved:</label>
+
+      <input type="radio" name="hdbApproved" id="approved" value="true" class="form-check-input">
+      <label for="approved" class="form-check-label">True</label>
+
+      <input type="radio" name="hdbApproved" id="not-approved" value="false" class="form-check-input">
+      <label for="not-approved" class="form-check-label">False</label>
+    </div>
+
+    <input type="submit" value="Add pet" class="btn btn-primary mt-4">
+  </form>
+
+{{/block}}
+
+{{/extends}}

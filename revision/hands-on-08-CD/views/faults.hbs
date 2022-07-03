@@ -1,0 +1,51 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+All Faults
+{{/block}}
+
+{{#block 'content'}}
+
+  <h1>All Faults</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Tags</th>
+        <th>Block Number</th>
+        <th>Name of reporter</th>
+        <th>Email of reporter</th>
+        <th>Follow Up</th>
+        <th>Resolved</th>
+        <th>Comments</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each faultRecords}}
+        <tr>
+          <td>{{this.name}}</td>
+          <td>{{this.location}}</td>
+          <td>{{this.tags}}</td>
+          <td>{{this.block}}</td>
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.followUp}}</td>
+          <td>{{this.resolved}}</td>
+          <td>{{this.comment}}</td>
+          <td>
+            <a href="/faults/{{this._id}}/update" class="btn btn-sm btn-primary">Update</a>
+            <a href="/faults/{{this._id}}/delete" class="btn btn-sm btn-danger">Delete</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+{{/block}}
+
+
+{{/extends}}

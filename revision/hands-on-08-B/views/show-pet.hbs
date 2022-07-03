@@ -1,0 +1,22 @@
+{{#extends 'base'}}
+
+{{#block 'title'}}
+Pet Details
+{{/block}}
+
+{{#block 'content'}}
+  <h1>Pet Info</h1>
+
+  <ul class="list-group">
+    <li class="list-group-item">Name: {{petRecord.name}}</li>
+    <li class="list-group-item">Breed: {{petRecord.breed}}</li>
+    <li class="list-group-item">Description: {{petRecord.description}}</li>
+    <li class="list-group-item">Age: {{petRecord.age}}</li>
+    <li class="list-group-item">Problems: {{petRecord.problems}}</li>
+    <li class="list-group-item">Tags: {{petRecord.tags}}</li>
+    <li class="list-group-item">HDB Approved: {{petRecord.hdbApproved}}</li>
+  </ul>
+
+{{/block}}
+
+{{/extends}}
