@@ -218,6 +218,119 @@ async function main() {
         res.redirect('/animal');
     });
 
+
+    // LAB 09
+    // CREATE: Add note to food item
+    // -> route to display form to add note
+    app.get('/food/:food_id/notes/add', async function(req, res) {
+        // Get food record
+        let foodRecord = await db.collection('food').findOne({
+            _id: ObjectId(req.params.food_id)
+        });
+
+        res.render('add-note', {
+            foodRecord
+        })
+    })
+
+    // -> route to process form to add note
+    app.post('/food/:food_id/notes/add', async function(req, res) {
+        // Get note content
+        let noteContent = req.body.content;
+
+        // Add note to notes array in database
+        await db.collection('food').updateOne({
+            _id: ObjectId(req.params.food_id)
+        }, {
+            "$push": {
+                'notes': {
+                    '_id': new ObjectId(),
+                    'content': noteContent
+                }
+            }
+        })
+
+        // Redirect to homepage
+        res.redirect('/food');
+    })
+
+    // READ: Display all notes of a food item
+    app.get('/food/:food_id', async function(req, res) {
+        let foodRecord = await db.collection('food').findOne({
+            _id: ObjectId(req.params.food_id)
+        });
+
+        res.render('food-details.hbs', {
+            foodRecord
+        })
+    })
+
+    // UPDATE: Update a note of a food item
+    app.get('/note/:note_id/edit', async function(req, res) {
+        let document = await db.collection('food').findOne({
+            'notes._id' : ObjectId(req.params.note_id)
+        }, {
+            'projection': {
+                'notes': {
+                    '$elemMatch': {
+                        '_id': ObjectId(req.params.note_id)
+                    }
+                }
+            }
+        })
+
+        console.log(document);
+
+        // Note: Even though we specify one note to be retrieved, it will still be contained within a notes array inside the food item object
+        // -> need to extract out the note
+        let note = document.notes[0];
+
+        res.render('edit-note.hbs', {
+            note
+        })
+
+    })
+
+    // -> route to process form to update note
+    app.post('/note/:note_id/edit', async function(req, res) {
+        let foodRecord = await db.collection('food').findOne({
+            'notes._id': ObjectId(req.params.note_id)
+        });
+
+        // Update the entire food document
+        await db.collection('food').updateOne({
+            'notes._id': ObjectId(req.params.note_id)
+        }, {
+            '$set': {
+                'notes.$.content': req.body.content
+            }
+        })
+
+        // redirect to food item page
+        res.redirect('/food/' + foodRecord._id );
+    })
+
+    // DELETE: Delete a note
+    app.get('/note/:note_id/delete', async function(req, res) {
+        let foodRecord = await db.collection('food').findOne({
+            'notes._id': ObjectId(req.params.note_id)
+        });
+
+        // Remove note from notes array in the food document
+        await db.collection('food').updateOne({
+            '_id': ObjectId(foodRecord._id)
+        }, {
+            '$pull': {
+                'notes': {
+                    '_id': ObjectId(req.params.note_id)
+                }
+            }
+        })
+
+        // Redirect to food item page
+        res.redirect('/food/' + foodRecord._id);
+    })
+
     // START SERVER
     app.listen(3000, function() {
         console.log('Server has started.');
