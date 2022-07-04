@@ -195,7 +195,7 @@ async function main() {
             // the token can store data but make sure not to store sensitive data in it
             // first arg = data to store
             // second arg = token secret
-            // thrid arg = options
+            // third arg = options
             let token = jwt.sign({
                 'email': req.body.email,
                 'user_id': user._id
