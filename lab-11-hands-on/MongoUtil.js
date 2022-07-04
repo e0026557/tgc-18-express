@@ -13,6 +13,7 @@ async function connect(mongoUri, dbName) {
 
     // Connect to database before we setup the route so that everything is ready when route is loaded
     const db = Client.db(dbName);
+    console.log('Database connected.');
     return db;
 }
 
